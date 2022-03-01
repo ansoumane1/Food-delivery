@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
     'bootstrap4',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +65,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -122,3 +126,25 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_URL = '/sign-in'
 LOGIN_REDIRECT_URL = "/"
+
+AUTHENTICATION_BACKENDS = (
+
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+SOCIAL_AUTH_FACEBOOK_KEY = "524570092320106"
+SOCIAL_AUTH_FACEBOOK_SECRET = "c5c2e0444a9b4ba110ad9057d4a188fc"
+SOCIAL_AUTH_FACEBOOK_SCOPE = ["email"]
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+
+    "fields" : "id, name, email",
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST ='smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ansoumanesoumaoro07@gmail.com'
+EMAIL_HOST_PASSWORD = 'ansou1994'
+DEFAULT_FROM_EMAIL = 'Fast Parcel <no-replay@fastparcel.localhost>'
+
